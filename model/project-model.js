@@ -1,5 +1,5 @@
 const mongoose=require("mongoose")
-const ProjectSchema=new mongoose.Schema({
+const project_Schema=new mongoose.Schema({
     
     projectName:{
         type:String,
@@ -32,6 +32,6 @@ const ProjectSchema=new mongoose.Schema({
 
 
 })
-const ProjectModel=mongoose.model("Project",ProjectSchema)
+const ProjectModel=mongoose.model("project",project_Schema)
 module.exports=ProjectModel
     

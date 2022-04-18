@@ -8,7 +8,16 @@ let User_taskSchema = new mongoose.Schema({
     task:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"task"
+    },
+    module:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"module"
+    },
+    project:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"project"
     }
+    
 })
 
 let User_taskModel = mongoose.model("UserTask",User_taskSchema)
