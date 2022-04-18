@@ -7,12 +7,14 @@ module.exports.addUser=function(req,res){
     //encrypt
     let encPassword=bcrypt.hashSync(password,10)
     let role=req.body.role
+    
 
     let user=new UserModel({
         firstName:firstName,
         email:email,
         password:encPassword,
-        role:role
+        role:role,
+      
     })
 
     user.save(function(err,data){
@@ -48,7 +50,7 @@ module.exports.updateUser=function(req,res){
     let userId=req.body.userId
    
     
-    let roleName=req.body.roleName
+   
     let firstName=req.body.firstName
     let email=req.body.email
     let password=req.body.password
@@ -64,13 +66,14 @@ module.exports.updateUser=function(req,res){
 }
 // login
 module.exports.login=function(req,res){
+    
     let param_email=req.body.email
     let param_password=req.body.password
-
+     //let param_role=req.body.role
     
 
     let isCorrect=false;
-    UserModel.findOne({email:param_email},function(err,data){
+    UserModel.findOne({email:param_email }).populate("role").exec(function(err,data){
         if(data){
             let ans= bcrypt.compareSync(param_password,data.password)
             if(ans==true){

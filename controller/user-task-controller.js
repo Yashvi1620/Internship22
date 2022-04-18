@@ -4,10 +4,14 @@ const User_taskSchema = require("../model/user-task-model")
 module.exports.addUserTask = function(req,res){
     let user = req.body.user
     let task = req.body.task
+    let module= req.body.module
+    let project = req.body.project
 
     let uesrtask = new User_taskSchema({
         user:user,
-        task:task
+        task:task,
+        module:module,
+        project:project
     })
 
     uesrtask.save(function(err,success){
@@ -31,7 +35,7 @@ module.exports.addUserTask = function(req,res){
 }
 
 module.exports.getAllUserTask = function(req,res){
-    User_taskModel.find().populate("user").populate("task").exec(function(err,success){
+    User_taskModel.find().populate("user").populate("task").populate("module").populate("project").exec(function(err,success){
         if(err)
         {
             res.json({
@@ -77,9 +81,11 @@ module.exports.updateUserTask = function(req,res){
     let UserTaskId = req.body.UserTaskId
     let user = req.body.user
     let task = req.body.task
+    let module= req.body.module
+    let project = req.body.project
     
     
-    User_taskModel.updateOne({_id:UserTaskId},{user:user,task:task},function(err,success){
+    User_taskModel.updateOne({_id:UserTaskId},{user:user,task:task,module:module,project:project},function(err,success){
         if(err)
         {
             res.json({
